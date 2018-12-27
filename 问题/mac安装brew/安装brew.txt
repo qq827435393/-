@@ -1,0 +1,22 @@
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install nodejs
+如果需要更新或卸载
+brew upgrade nodejs
+brew remove nodejs
+
+brew list                   # 列出当前安装的软件
+brew search nodejs          # 查询与 nodejs 相关的可用软件
+brew info nodejs            # 查询 nodejs 的安装信息
+
+brew services 是一个非常强大的工具，可以用来管理各种服务的启停，有点像 linux 里面的 services，非常方便，以 elasticsearch 为例
+
+brew install elasticsearch          # 安装 elasticsearch
+brew services start elasticsearch   # 启动 elasticsearch
+brew services stop elasticsearch    # 停止 elasticsearch
+brew services restart elasticsearch # 重启 elasticsearch
+brew services list   
+--------------------- 
+brew services 服务相关配置以及日志路径
+配置路径：/usr/local/etc/
+日志路径：/usr/local/var/log
