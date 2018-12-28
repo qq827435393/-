@@ -1,0 +1,16 @@
+    我有个模块编译成一个so库供其他程序使用。比如A,B都需要链接lib.so。lib.so里面有个全局指针p，当A程序调用lib.so的函数启动lib的功能后这个p指针就被赋值了。然后B程序启动，但奇怪的是在B程序里面调用lib.so库函数去get p指针的时得到的却是未初始化的值。导致B程序无法运行，然后就郁闷了半天。明明A已经正常启动把p赋值了，为什么p还是NULL呢？原来是A和B只是共有Lib.so的代码段，但是数据段A和B都有各自的一份是不共享的
+--------------------- 
+
+将Lib.c编译成一个so库：
+
+gcc -fPIC -shared -o lib.so lib.c
+
+
+编译：
+
+gcc -o program1 program1.c ./lib.so
+gcc -o program2 program2.c ./lib.so
+
+
+
+可以看出对于两个线程，so的数据段是共享的。---->>>.   pthread.c

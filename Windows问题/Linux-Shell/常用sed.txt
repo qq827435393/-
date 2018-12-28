@@ -1,0 +1,23 @@
+删除：d命令
+sed -i '2d' /etc/test.c    		//删除test.c文件第二行    //-i 直接修改并保存
+sed -i '2,$d' /etc/test.c		//删除test.c文件  第二行到最后一行。
+sed -i '$d' /etc/test			//删除最后一行
+sed -i '/test/d' /etc/test		//删除test.c文件所有包含test的行。
+
+替换：sed -i 's/要被替换的字符串/新的字符串/g' /file
+以行为单位！ 不加g 表示这一行匹配到一个就结束。加g表示匹配这一行所有。
+sed -i 's/^kan/han&/' /file		//--&表示替换字符串（kan），每一行以kan开头，都在字符kan前面+han&/
+sed -i 's/kan.*/han/' /file		//每一行，以kan开头的匹配字符 被替换为han。
+
+查：p
+sed -n '3p' /test.txt			//打印第三行内容
+sed -n '/is/p' /test.txt		//打印含有is的行
+sed -n '/is/!p' /test.txt		//打印没有is的行
+
+sed -i '2a han'   在第二行之后加入“han”
+sed -i '/is/a han'	在含有is的行之后加入“han”
+sed -i '2i han'    在第二行之前加入”han“
+sed '2,5c han'     将第2～5行的内容替换为“han”
+
+
+sed 's/^[0-9]/000&/' file1		//##在数字开头的行前面加000
